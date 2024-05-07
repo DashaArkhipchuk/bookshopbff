@@ -1,0 +1,34 @@
+spring:
+  application:
+    name:
+      bookshop-bff
+  security:
+    user:
+      name: 1
+      password: 1
+
+server:
+  port: 8086
+
+eureka:
+  client:
+    enabled: true
+
+
+app:
+  api:
+    version:
+      bookshop: "/api/v1"
+    path:
+      version:
+        v1: "/api/v1"
+      book:
+        createBook: "/book/create"
+        deleteBook: "/book/delete"
+        updateBook: "/book/update"
+        getBooks: "/books"
+        getBook: "/book"
+      author:
+        createAuthor: "/author/create"
+      user:
+        getUser: "/user"
