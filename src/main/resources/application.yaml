@@ -2,10 +2,11 @@ spring:
   application:
     name:
       bookshop-bff
-  security:
-    user:
-      name: 1
-      password: 1
+
+security:
+  app:
+    authentication:
+      cookie: "ud"
 
 server:
   port: 8086
@@ -14,21 +15,24 @@ eureka:
   client:
     enabled: true
 
-
 app:
   api:
     version:
-      bookshop: "/api/v1"
+        bookshop: "/api/v1"
     path:
-      version:
-        v1: "/api/v1"
       book:
         createBook: "/book/create"
         deleteBook: "/book/delete"
+        deleteBooks: "/book/deleteByAuthor"
         updateBook: "/book/update"
         getBooks: "/books"
         getBook: "/book"
       author:
         createAuthor: "/author/create"
+        getAuthors: "/authors"
+        getAuthorNames: "/author/names"
+        getAuthor: "/author"
+        updateAuthor: "/author/update"
+        deleteAuthor: "/author/delete"
       user:
         getUser: "/user"

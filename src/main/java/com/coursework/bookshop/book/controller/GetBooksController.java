@@ -1,7 +1,8 @@
-package com.coursework.bookshop.bff.controller;
+package com.coursework.bookshop.book.controller;
 
 import com.coursework.bookshop.book.dto.BookDto;
-import com.coursework.bookshop.bff.service.BookService;
+import com.coursework.bookshop.book.request.DeleteBookRequest;
+import com.coursework.bookshop.book.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,9 @@ public class GetBooksController {
 
         Map<String, List<BookDto>> result=new HashMap<>();
         result.put("books",allBooks);
+        ModelAndView modelandview = new ModelAndView("books", result, HttpStatus.OK);
+        modelandview.addObject("deletebookobj", DeleteBookRequest.builder().build());
+        return modelandview;
 
-        return new ModelAndView("books", result, HttpStatus.OK);
     }
 }
