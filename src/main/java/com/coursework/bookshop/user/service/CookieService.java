@@ -42,14 +42,5 @@ public class CookieService {
     }
 
 
-    //GetCookies
-
-
-
-
-    //ClearCookies
-    //UpdateCookies
-
-
 
 }

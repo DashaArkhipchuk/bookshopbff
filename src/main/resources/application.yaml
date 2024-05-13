@@ -20,6 +20,7 @@ app:
     version:
         bookshop: "/api/v1"
     path:
+      home: "/"
       book:
         createBook: "/book/create"
         deleteBook: "/book/delete"
@@ -36,3 +37,5 @@ app:
         deleteAuthor: "/author/delete"
       user:
         getUser: "/user"
+        createUser: "/user/create"
+        signup: "/signup"

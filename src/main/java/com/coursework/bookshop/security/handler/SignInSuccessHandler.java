@@ -27,6 +27,6 @@ public class SignInSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
         String jsonPrincipal = new Gson().toJson(principal);
         cookieService.createCookie(USER_COOKIE_CREDENTIALS, jsonPrincipal, 24 * 60 * 60, response);
-        response.sendRedirect("/books");
+        response.sendRedirect("/");
     }
 }

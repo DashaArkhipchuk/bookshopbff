@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CreateBookRequest {
+public class CreateBookRequestWithAuthorId {
     @NotBlank(message = "Title is required")
     private String title;
 
@@ -24,7 +24,7 @@ public class CreateBookRequest {
     @DecimalMin(value = "0.0", message = "Price must be greater than or equal to 0.0")
     private Double price;
 
-    @Valid
-    private CreateAuthorRequest author;
-
+    @NotNull(message = "Author id is required")
+    @Min(value = 1, message = "Author id must be greater than or equal to 1")
+    private Integer authorId;
 }

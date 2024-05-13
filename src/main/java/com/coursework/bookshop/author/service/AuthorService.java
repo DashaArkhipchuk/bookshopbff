@@ -33,7 +33,7 @@ public class AuthorService {
 
     public AuthorDto createAuthor(CreateAuthorRequest createAuthorRequest) { return bookshopApiClient.createAuthor(createAuthorRequest); }
 
-    public AuthorDto updateAuthor(UpdateAuthorRequest updateAuthorRequest) { return bookshopApiClient.updateAuthor(updateAuthorRequest); }
+    public AuthorDto updateAuthor(UpdateAuthorRequest updateAuthorRequest) { log.info(updateAuthorRequest); return bookshopApiClient.updateAuthor(updateAuthorRequest); }
 
     public Author deleteAuthorByRequest(DeleteAuthorRequest deleteAuthorRequest) { bookshopApiClient.deleteBooks(deleteAuthorRequest); return bookshopApiClient.deleteAuthor(deleteAuthorRequest); }
 }

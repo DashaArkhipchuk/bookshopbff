@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -45,18 +46,16 @@ public class UpdateBookController {
         model.put("authors", getAuthors);
         ModelAndView modelAndView = new ModelAndView("updatebook", model, HttpStatus.OK);
         modelAndView.addObject("b", b);
-        modelAndView.addObject("book", BookWithAuthorIdDto.builder().build());
+        modelAndView.addObject("book", UpdateBookRequest.builder().build());
 
         return modelAndView;
     }
 
     @PostMapping("${app.api.path.book.updateBook}")
-    public ModelAndView updateBook(@ModelAttribute BookWithAuthorIdDto book) throws Exception {
+    public ModelAndView updateBook(@ModelAttribute @Validated UpdateBookRequest book) throws Exception {
         FullAuthorDto author = authorService.getAuthor(book.getAuthorId());
         if (author!=null){
-
-            UpdateBookRequest updateBookRequest = BookRequestMapper.mapBooktoUpdateBookRequest(bookWithAuthorIdDtoMapper.mapBookBookWithAuthorIdDtoToBook(book));
-            BookDto savedBook = bookService.updateBook(updateBookRequest);
+            BookDto savedBook = bookService.updateBook(book);
             RedirectView redirectView = new RedirectView("/book?id=" + savedBook.getId(), true);
             return new ModelAndView(redirectView);
         } else{

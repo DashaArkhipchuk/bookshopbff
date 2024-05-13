@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="publishYear">Publish Year:</label>
-            <input type="text" id="publishYear" name="publishYear" th:field="*{publishYear}" class="form-control" required>
+            <input type="number" id="publishYear" name="publishYear" th:field="*{publishYear}" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="genre">Genre:</label>
@@ -36,7 +36,7 @@
         </div>
         <div class="form-group">
             <label for="price">Price:</label>
-            <input type="text" id="price" name="price" th:field="*{price}" class="form-control" required>
+            <input type="number" id="price" name="price" th:field="*{price}" class="form-control" step="0.01" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

@@ -47,6 +47,9 @@
         <p class="book-info">Genre: <span th:text="${book.genre}"></span></p>
         <p class="book-info">Author: <span th:text="${book.author.firstName + ' ' + book.author.lastName}"></span></p>
         <p class="book-info">Price: $<span th:text="${book.price}"></span></p>
+        <div class="text-center mt-3">
+            <a th:href="@{/books}" class="btn btn-secondary">Back to Books</a>
+        </div>
     </div>
 </div>
 

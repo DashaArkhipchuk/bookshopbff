@@ -12,6 +12,7 @@ import com.coursework.bookshop.book.request.CreateBookRequest;
 import com.coursework.bookshop.book.request.DeleteBookRequest;
 import com.coursework.bookshop.book.request.UpdateBookRequest;
 import com.coursework.bookshop.user.entity.User;
+import com.coursework.bookshop.user.request.RegisterUserRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -76,5 +77,10 @@ public interface BookshopApiClient {
     @DeleteMapping("${app.api.version.bookshop}${app.api.path.book.deleteBooks}")
     public Book deleteBooks(
             @RequestBody DeleteAuthorRequest deleteAuthorRequest
+    );
+
+    @PostMapping("${app.api.version.bookshop}${app.api.path.user.createUser}")
+    public Boolean createUser(
+            @RequestBody RegisterUserRequest registerUserRequest
     );
 }

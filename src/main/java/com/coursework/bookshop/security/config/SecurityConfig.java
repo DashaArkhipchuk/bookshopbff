@@ -29,6 +29,27 @@ public class SecurityConfig {
     @Value("${app.api.path.book.getBooks}")
     private String PATH_BOOKS;
 
+    @Value("${app.api.path.user.signup}")
+    private String PATH_SIGNUP;
+
+    @Value("${app.api.path.book.deleteBook}")
+    private String PATH_DELETE_BOOK;
+
+    @Value("${app.api.path.author.deleteAuthor}")
+    private String PATH_DELETE_AUTHOR;
+
+    @Value("${app.api.path.author.createAuthor}")
+    private String PATH_CREATE_AUTHOR;
+
+    @Value("${app.api.path.book.createBook}")
+    private String PATH_CREATE_BOOK;
+
+    @Value("${app.api.path.author.updateAuthor}")
+    private String PATH_UPDATE_AUTHOR;
+
+    @Value("${app.api.path.book.updateBook}")
+    private String PATH_UPDATE_BOOK;
+
     @Value("${security.app.authentication.cookie}")
     private String USER_COOKIE_CREDENTIALS;
 
@@ -40,6 +61,22 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
+                                .requestMatchers(PATH_SIGNUP)
+                                .anonymous()
+
+                                .requestMatchers("/signin")
+                                .anonymous()
+
+                                .requestMatchers(PATH_DELETE_BOOK,PATH_DELETE_AUTHOR)
+                                .hasAuthority(Role.ADMIN.toString())
+
+                                .requestMatchers("/exit")
+                                .hasAnyAuthority(Role.ADMIN.toString(), Role.MANAGER.toString(), Role.USER.toString())
+
+                                .requestMatchers(PATH_CREATE_BOOK, PATH_CREATE_AUTHOR, PATH_UPDATE_AUTHOR, PATH_UPDATE_BOOK)
+                                .hasAnyAuthority(Role.ADMIN.toString(), Role.MANAGER.toString())
+
+
 //                        .requestMatchers(PATH_BOOKS)
 //                        .authenticated()
 

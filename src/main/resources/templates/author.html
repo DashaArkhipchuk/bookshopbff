@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Book Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/bookdetails.css">
 </head>
 <body>
@@ -14,6 +15,9 @@
         <h2 class="book-title" th:text="${author.firstName + ' ' + author.lastName}"></h2>
         <p class="book-info">Biography: <span th:text="${author.biography}"></span></p>
         <p class="book-info">ActivityYears: <span th:text="${author.activityYears}"></span></p>
+        <div class="text-center mt-3">
+            <a th:href="@{/authors}" class="btn btn-secondary">Back to Authors</a>
+        </div>
     </div>
 </div>
 

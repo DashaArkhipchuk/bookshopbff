@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Books</title>
@@ -21,7 +22,10 @@
             <th>Price</th>
             <th>Details</th>
             <th>Update</th>
-            <th>Delete</th>
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <th >Delete</th>
+
+            </div>
         </tr>
         </thead>
         <tbody>
@@ -32,7 +36,8 @@
             <td th:text="${book.price}"></td>
             <td><a th:href="@{/book(id=${book.id})}" class="btn btn-info">Details</a></td>
             <td><a th:href="@{/book/update(id=${book.id})}" class="btn btn-warning">Update</a></td>
-            <td>
+
+            <td sec:authorize="hasAuthority('ADMIN')">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#deleteModal' + ${book.id}">
                     Delete

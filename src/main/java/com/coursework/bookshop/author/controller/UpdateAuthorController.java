@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,16 +43,15 @@ public class UpdateAuthorController {
         FullAuthorDto a = authorService.getAuthor(id);
         ModelAndView modelAndView = new ModelAndView("updateauthor", new HashMap<>(), HttpStatus.OK);
         modelAndView.addObject("a", a);
-        modelAndView.addObject("author", FullAuthorDto.builder().build());
+        modelAndView.addObject("author", UpdateAuthorRequest.builder().build());
 
         return modelAndView;
     }
 
     @PostMapping("${app.api.path.author.updateAuthor}")
-    public ModelAndView updateAuthor(@ModelAttribute FullAuthorDto author) throws Exception {
-
-            UpdateAuthorRequest updateAuthorRequest = AuthorRequestMapper.mapAuthortoUpdateAuthorRequest(fullAuthorDtoMapper.mapFullAuthorDtoToAuthor(author));
-            AuthorDto authorDto = authorService.updateAuthor(updateAuthorRequest);
+    public ModelAndView updateAuthor(@ModelAttribute @Validated UpdateAuthorRequest author) throws Exception {
+            log.info(author);
+            AuthorDto authorDto = authorService.updateAuthor(author);
             RedirectView redirectView = new RedirectView("/author?id=" + authorDto.getId(), true);
             return new ModelAndView(redirectView);
     }

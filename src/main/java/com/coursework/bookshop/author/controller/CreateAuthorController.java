@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,16 +37,15 @@ public class CreateAuthorController {
     public ModelAndView getCreateForm(
     ){
         ModelAndView modelAndView = new ModelAndView("createauthor", new HashMap<>(), HttpStatus.OK);
-        modelAndView.addObject("author", FullAuthorDto.builder().build());
+        modelAndView.addObject("author", CreateAuthorRequest.builder().build());
 
         return modelAndView;
     }
 
     @PostMapping("${app.api.path.author.createAuthor}")
-    public ModelAndView createAuthor(@ModelAttribute FullAuthorDto author) throws Exception {
+    public ModelAndView createAuthor(@ModelAttribute @Validated CreateAuthorRequest author) throws Exception {
 
-            CreateAuthorRequest createAuthorRequest = AuthorRequestMapper.mapAuthorToAuthorRequest(fullAuthorDtoMapper.mapFullAuthorDtoToAuthor(author));
-            AuthorDto authorDto = authorService.createAuthor(createAuthorRequest);
+            AuthorDto authorDto = authorService.createAuthor(author);
             RedirectView redirectView = new RedirectView("/author?id=" + authorDto.getId(), true);
             return new ModelAndView(redirectView);
     }
